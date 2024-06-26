@@ -10,9 +10,13 @@ const createError = require("http-errors");
 const app = express();
 
 // Database setup
-mongoose.connect("mongodb://127.0.0.1:27017/watch-management", {
-  useUnifiedTopology: true,
-});
+mongoose
+  .connect("mongodb://127.0.0.1:27017/watch-management", {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(() => console.log("MongoDB connected..."))
+  .catch((err) => console.log(err));
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
@@ -34,7 +38,8 @@ app.use(function (req, res, next) {
 app.use(function (err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
-  res.locals.error = req.app.get(process.env.NODE_ENV) === "development" ? err : {};
+  res.locals.error =
+    req.app.get(process.env.NODE_ENV) === "development" ? err : {};
 
   // render the error page
   res.status(err.status || 500);
