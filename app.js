@@ -7,6 +7,11 @@ const mongoose = require("mongoose");
 const methodOverride = require("method-override");
 const createError = require("http-errors");
 
+const memberRouter = require("./routes/memberRoutes");
+const brandRouter = require("./routes/brandRoutes");
+const watchRouter = require("./routes/watchRoutes");
+const authRouter = require("./routes/authRoutes");
+
 const app = express();
 
 // Database setup
@@ -17,6 +22,19 @@ mongoose
   })
   .then(() => console.log("MongoDB connected..."))
   .catch((err) => console.log(err));
+
+app.use(
+  cors({
+    origin: process.env.URl_FE,
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+    credentials: true,
+  })
+);
+
+app.use("/api/v1/members", memberRouter);
+app.use("/api/v1/brands", brandRouter);
+app.use("/api/v1/watches", watchRouter);
+app.use("/api/v1/auth", authRouter);
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));

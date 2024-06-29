@@ -4,7 +4,6 @@ const Schema = _Schema;
 const brandSchema = new Schema(
   {
     brandName: { type: String, required: true },
-    nation: { type: String, required: true },
   },
   { timestamps: true }
 );

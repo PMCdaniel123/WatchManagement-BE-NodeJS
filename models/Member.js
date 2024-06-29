@@ -13,7 +13,7 @@ const memberSchema = new Schema(
     },
     isAdmin: { type: Boolean, default: false },
     name: { type: String, required: true },
-    yob: { type: Number, min: 1900, max: currentYear, required: true },
+    YOB: { type: Number, min: 1900, max: currentYear, required: true },
     refreshToken: { type: String },
   },
   { timestamps: true }
